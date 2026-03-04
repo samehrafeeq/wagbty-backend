@@ -1,98 +1,324 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+<div align="center">
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+# 🍽️ وجبتي — Wagbty
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+**منصة حجز وجبات ذكية تربط بين المستخدمين والمطاعم**
 
-## Description
+![React](https://img.shields.io/badge/React_18-61DAFB?style=flat&logo=react&logoColor=black)
+![NestJS](https://img.shields.io/badge/NestJS_11-E0234E?style=flat&logo=nestjs&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=typescript&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=flat&logo=mysql&logoColor=white)
+![Tailwind](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=flat&logo=tailwindcss&logoColor=white)
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+</div>
 
-## Project setup
+---
 
-```bash
-$ npm install
+## 📖 نبذة عن المشروع
+
+**وجبتي** هو نظام متكامل لحجز الوجبات يتكون من:
+
+- **واجهة أمامية (Frontend)** بتصميم عربي احترافي يدعم RTL
+- **خادم خلفي (Backend)** يوفر API آمن وقاعدة بيانات منظمة
+- **لوحة تحكم إدارية** للمشرفين لإدارة المطاعم والتصنيفات والمواقع
+
+المشروع يدعم **3 أنواع من المستخدمين**:
+
+| الدور | الوصف |
+|-------|-------|
+| 👤 **مستخدم** | يتصفح المطاعم والوجبات ويقوم بالحجز |
+| 🏪 **مطعم** | يسجل حسابه وينتظر موافقة الإدارة ثم يدير وجباته |
+| 🛡️ **مشرف (Admin)** | يدير المنصة بالكامل من لوحة تحكم مستقلة |
+
+---
+
+## 🏗️ هيكل المشروع
+
+```
+wagbty/
+├── src/                    ← الواجهة الأمامية (React)
+│   ├── components/         ← المكونات المشتركة
+│   ├── pages/              ← صفحات التطبيق
+│   ├── contexts/           ← إدارة حالة المصادقة (AuthContext)
+│   ├── hooks/              ← React Hooks مخصصة
+│   └── lib/                ← دوال API والأدوات المساعدة
+│
+├── backend/                ← الخادم الخلفي (NestJS)
+│   ├── src/
+│   │   ├── auth/           ← نظام المصادقة (JWT)
+│   │   ├── entities/       ← جداول قاعدة البيانات
+│   │   ├── migrations/     ← ملفات ترحيل قاعدة البيانات
+│   │   ├── categories/     ← إدارة التصنيفات
+│   │   ├── restaurants/    ← إدارة المطاعم
+│   │   ├── locations/      ← إدارة المواقع (دول/محافظات/مدن)
+│   │   ├── users/          ← إدارة المستخدمين
+│   │   └── seed/           ← بيانات أولية
+│   └── .env                ← إعدادات البيئة
+│
+└── public/                 ← ملفات ثابتة
 ```
 
-## Compile and run the project
+---
 
-```bash
-# development
-$ npm run start
+## ✨ المميزات الرئيسية
 
-# watch mode
-$ npm run start:dev
+### للمستخدم
+- 🔍 تصفح المطاعم والوجبات
+- 📍 اختيار الموقع (دولة → محافظة → مدينة)
+- 👤 إنشاء حساب وتسجيل دخول آمن
+- 📱 تصميم متجاوب يعمل على جميع الأجهزة
 
-# production mode
-$ npm run start:prod
+### للمطعم
+- 📝 تسجيل حساب مع اختيار تصنيفات متعددة
+- ⏳ نظام موافقة إدارية قبل التفعيل
+- 📍 تحديد الموقع الجغرافي
+
+### للمشرف (لوحة التحكم)
+- 🏪 إدارة المطاعم (موافقة / رفض / حذف)
+- 🏷️ إدارة التصنيفات (إضافة / تعديل / حذف)
+- 🌍 إدارة المواقع الجغرافية (دول / محافظات / مدن) مع تفعيل/تعطيل
+- 📊 إحصائيات سريعة
+- 📱 لوحة تحكم متجاوبة مع قائمة جانبية
+
+---
+
+## 🗺️ صفحات التطبيق
+
+### الصفحات العامة (للجميع)
+| الصفحة | الرابط |
+|--------|--------|
+| الرئيسية | `/` |
+| قائمة الوجبات | `/menu` |
+| تفاصيل وجبة | `/meal/:id` |
+| صفحة مطعم | `/restaurant/:id` |
+| كيف يعمل | `/how-it-works` |
+| الأسئلة الشائعة | `/faq` |
+| اتصل بنا | `/contact` |
+| سياسة الخصوصية | `/privacy` |
+| الشروط والأحكام | `/terms` |
+
+### صفحات تسجيل الدخول
+| الصفحة | الرابط |
+|--------|--------|
+| تسجيل دخول (مستخدم/مطعم) | `/login` |
+| إنشاء حساب (مستخدم/مطعم) | `/signup` |
+| تسجيل مطعم مستقل | `/restaurant-signup` |
+| دخول المشرف | `/admin/login` |
+
+### الصفحات المحمية (تحتاج تسجيل دخول)
+| الصفحة | الرابط | الدور المطلوب |
+|--------|--------|---------------|
+| لوحة المستخدم | `/dashboard` | مستخدم |
+| لوحة المطعم | `/restaurant-dashboard` | مطعم |
+| لوحة الإدارة | `/admin` | مشرف |
+
+---
+
+## 🗄️ قاعدة البيانات
+
+### الجداول
+
+| الجدول | الوصف |
+|--------|-------|
+| `users` | المستخدمون (بما فيهم المشرف) |
+| `restaurants` | المطاعم |
+| `categories` | تصنيفات الطعام |
+| `countries` | الدول |
+| `governorates` | المحافظات |
+| `cities` | المدن |
+
+### العلاقات
+
+```
+الدولة  ←──  1 : N  ──→  المحافظة  ←──  1 : N  ──→  المدينة
+                              │                          │
+                       المستخدم / المطعم          المستخدم / المطعم
 ```
 
-## Run tests
+### الترحيلات (Migrations)
+| الترحيل | الوصف |
+|---------|-------|
+| `InitialSchema` | إنشاء جداول المستخدمين والمطاعم |
+| `AddApprovalAndCategories` | إضافة نظام الموافقة وجدول التصنيفات |
+| `AddLocations` | إضافة جداول الدول والمحافظات والمدن |
+
+> ⚡ الترحيلات تعمل **تلقائياً** عند تشغيل الخادم — لا حاجة لتشغيلها يدوياً
+
+---
+
+## 🔐 نظام المصادقة
+
+| الميزة | التفاصيل |
+|--------|----------|
+| **التوكن** | JWT — صلاحية 7 أيام |
+| **تشفير كلمات المرور** | bcrypt |
+| **حماية نقاط الوصول** | Passport + Guards حسب الدور |
+| **نظام موافقة المطاعم** | المطعم يسجل ← ينتظر موافقة المشرف ← يتم تفعيله |
+
+---
+
+## 🚀 تشغيل المشروع
+
+### المتطلبات
+- **Node.js** 18 أو أحدث
+- **MySQL** 8 أو أحدث
+- **npm** أو **bun**
+
+### 1️⃣ تشغيل الواجهة الأمامية
 
 ```bash
-# unit tests
-$ npm run test
+# تثبيت المكتبات
+npm install
 
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+# تشغيل في وضع التطوير
+npm run dev
 ```
 
-## Deployment
+> يعمل على: `http://localhost:8080`
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+### 2️⃣ تشغيل الخادم الخلفي
 
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+cd backend
+
+# تثبيت المكتبات
+npm install
+
+# تأكد من وجود MySQL يعمل ثم عدّل ملف .env
+
+# تشغيل في وضع التطوير
+npm run start:dev
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+> يعمل على: `http://localhost:3001/api`
+>
+> 💡 قاعدة البيانات والجداول تُنشأ تلقائياً — وحساب المشرف يُنشأ عند أول تشغيل
 
-## Resources
+### 3️⃣ إضافة بيانات المواقع (اختياري)
 
-Check out a few resources that may come in handy when working with NestJS:
+```bash
+cd backend
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+# يضيف 22 دولة عربية + جميع محافظات ومدن مصر
+npm run seed:locations
+```
 
-## Support
+### 4️⃣ حساب المشرف الافتراضي
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+| | |
+|---|---|
+| **الرابط** | `http://localhost:8080/admin/login` |
+| **البريد** | `admin@wagbty.com` |
+| **كلمة المرور** | `Admin@123` |
 
-## Stay in touch
+---
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+## ⚙️ إعدادات البيئة (`backend/.env`)
 
-## License
+```env
+# الخادم
+PORT=3001
+FRONTEND_URL=http://localhost:8080
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+# قاعدة البيانات
+DB_HOST=localhost
+DB_PORT=3306
+DB_USERNAME=root
+DB_PASSWORD=
+DB_DATABASE=wagbty
+
+# المصادقة
+JWT_SECRET=your-secret-key
+JWT_EXPIRES_IN=7d
+
+# المشرف الافتراضي
+ADMIN_NAME=Admin
+ADMIN_EMAIL=admin@wagbty.com
+ADMIN_PASSWORD=Admin@123
+```
+
+---
+
+## 🛠️ التقنيات المستخدمة
+
+### الواجهة الأمامية (Frontend)
+| التقنية | الاستخدام |
+|---------|-----------|
+| React 18 | بناء الواجهة |
+| TypeScript | أمان الأنواع |
+| Vite | أداة البناء السريعة |
+| Tailwind CSS | التنسيق |
+| shadcn/ui + Radix | مكونات UI جاهزة |
+| React Router v6 | التنقل بين الصفحات |
+| Lucide Icons | الأيقونات |
+| Zod + React Hook Form | التحقق من المدخلات |
+| Vitest | الاختبارات |
+
+### الخادم الخلفي (Backend)
+| التقنية | الاستخدام |
+|---------|-----------|
+| NestJS 11 | إطار العمل |
+| TypeScript | أمان الأنواع |
+| TypeORM | التعامل مع قاعدة البيانات |
+| MySQL | قاعدة البيانات |
+| Passport + JWT | المصادقة |
+| bcrypt | تشفير كلمات المرور |
+| class-validator | التحقق من البيانات |
+
+---
+
+## 📝 أوامر مفيدة
+
+### الواجهة الأمامية
+```bash
+npm run dev          # تشغيل وضع التطوير
+npm run build        # بناء للإنتاج
+npm run lint         # فحص الكود
+npm run test         # تشغيل الاختبارات
+```
+
+### الخادم الخلفي
+```bash
+npm run start:dev      # تشغيل وضع التطوير
+npm run build          # بناء المشروع
+npm run start:prod     # تشغيل وضع الإنتاج
+npm run seed           # بيانات المشرف الأولية
+npm run seed:locations # بيانات المواقع
+npm run test           # تشغيل الاختبارات
+```
+
+---
+
+## 👥 فريق العمل
+
+<div align="center">
+
+### 💻 Backend Development
+| | | |
+|:---:|:---:|:---:|
+| **ضحى** | **أحمد** | **شمس** |
+
+### 🎨 Frontend Development
+| | | |
+|:---:|:---:|:---:|
+| **عمر** | **عمر** | **أدهم** |
+
+### 🖌️ UI/UX Design
+| | | |
+|:---:|:---:|:---:|
+| **أسماء** | **السيد** | **مدحت** |
+
+### 📊 Analysis
+| | | |
+|:---:|:---:|:---:|
+| **زيكو** | **مريم** | **صلاح** |
+
+</div>
+
+---
+
+<div align="center">
+
+**صنع بـ ❤️ من فريق وجبتي**
+
+</div>
